@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hospitalizacion</title>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="hospitalizacion.css">
     <script src="js2/funciones_comunes.js"></script>
     <script src="hospitalizacion.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="h-100 w-100 mx-3">
-       <h1 class="text-center py-2">Salas De Hospitalizacion</h1>
-    <div class="row container-xl">
-        <div id="contenedorUnidades"> 
+       <h1 class="text-center py-2">Salas de Hospitalización</h1>
+    <div class="container-xl">
+        <div class="row" id="contenedorUnidades"> 
           <!-- <div class="pushable card col-3 border p-0" >
                 <div class="card-header fw-bold bg-success-subtle text-center ">
                     UCI
@@ -26,6 +27,24 @@
         
         <div class="row container-xl d-none" id="contenedorCamas"></div>
     </div>
-    <button class="volver btn-outline-success btn position-fixed top-0 mt-3 ms-3">volver</button>
+    <button class="volver btn-outline-success btn position-fixed top-0 mt-3 ms-3">Volver</button>
+    <!-- Modal -->
+<div class="modal fade" id="modalPacientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Pacientes</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
