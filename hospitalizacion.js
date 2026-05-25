@@ -3,10 +3,11 @@ let camas= null
 let contenedorCamas=document.getElementById("contenedorCamas")
 let contenerdorUnidades=document.getElementById("contenedorUnidades")
 let tituloDeSala=document.querySelector("h1")
-   document.addEventListener("DOMContentLoaded",async function(){
+let tablaPacientes=document.getElementById("tablaPacientes")
+    document.addEventListener("DOMContentLoaded",async function(){
     unidades=await retornar_opciones (3,7)
     camas=await retornar_opciones(2,7);
-   unidades=unidades.filter((unidad)=> unidad.activo==1)
+    unidades=unidades.filter((unidad)=> unidad.activo==1)
             unidades.forEach((unidad)=>{
        // if(unidad.activo==0)return
         let elementoDiv=document.createElement("div");
@@ -47,8 +48,9 @@ function renderizarCamas(idUnidad){
         element.addEventListener("click",()=>{
             Swal.fire({
                 title:"Aviso",
-                icon:"info",
+                icon:"info", 
                 text:"Cama Estado",
+                
             })
         })
     })
@@ -62,5 +64,33 @@ document.querySelectorAll(".volver").forEach((el)=>{
     })  
 })
 
-
-
+async function getPacientes() {
+    let payload={
+        id_cli:configs_token.id_cli,
+        status_cierre:"abierta",
+        fecha_inicio:"2020-01-01",
+        fecha_fin:new Date().toISOString().split("T")[0],
+        activos:[1],
+        tipos_consulta:["E","S","P","I"],
+        page:1,
+        perPage:1000,
+        agrupado:"s",
+        }
+    let pacientes=await postDatos(`${API_HOST}/api/facturacion/admisiones_admidet`,payload,document.querySelector("body"))
+        renderizarPacientes(pacientes.resultados)
+}
+document.getElementById("modalPacientes").addEventListener("show.bs.modal",getPacientes)
+function renderizarPacientes(pacientes){
+    let html="";
+    pacientes.forEach((paciente)=>{
+        html+=`<tr>
+        <td>${ajustarFechaHoraUTC4(paciente.fecha_admision).soloFechaFormateada}</td>
+        <td class="text-nowrap">${paciente.nombre_completo_paciente}</td>
+        <td class="text-nowrap">${paciente.Edad}</td>
+        <td class="text-nowrap">${paciente.cedula_paciente}</td>
+        <td><button type="button" class="btn btn-sm btn-outline-info "><i class="bi bi-box-arrow-right "></i></button></td>
+        </tr>
+        `
+                })
+    tablaPacientes.innerHTML=html;
+}
